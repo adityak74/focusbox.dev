@@ -9,16 +9,21 @@ function Header() {
   }
 
   return (
-    <header className="header">
+    <header className="header" role="banner">
       <div className="header-content">
-        <h1 className="logo">FocusBox.dev</h1>
+        <h1 className="logo">
+          <a href="/" aria-label="FocusBox.dev - Home">
+            FocusBox.dev
+          </a>
+        </h1>
         <p className="tagline">Timebox your focus. Locally. Effortlessly.</p>
         <button
           className="settings-btn"
           onClick={handleSettingsClick}
           aria-label="Open settings"
+          type="button"
         >
-          <Settings size={20} />
+          <Settings size={20} aria-hidden="true" />
         </button>
       </div>
     </header>

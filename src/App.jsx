@@ -12,8 +12,10 @@ function App() {
     <FocusBoxProvider>
       <div className="app">
         <Header />
-        <Workspace />
-        <TimerWidget />
+        <main className="main-content" role="main">
+          <Workspace />
+          <TimerWidget />
+        </main>
         <SettingsModal />
         <TaskModal />
         <Footer />

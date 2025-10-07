@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://focusbox.dev/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Disallow crawling of build artifacts and development files
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /src/
+Disallow: /.git/
+Disallow: /wrangler.toml
+Disallow: /vite.config.js
+Disallow: /package*.json
+Disallow: /CLAUDE.md
