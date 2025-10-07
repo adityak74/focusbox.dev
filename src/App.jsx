@@ -6,8 +6,18 @@ import SettingsModal from './components/SettingsModal'
 import TaskModal from './components/TaskModal'
 import Footer from './components/Footer'
 import Notification from './components/Notification'
+import Privacy from './components/Privacy'
 
 function App() {
+  // Simple routing based on current path
+  const currentPath = window.location.pathname
+  
+  // If we're on the privacy page, show only the Privacy component
+  if (currentPath === '/privacy') {
+    return <Privacy />
+  }
+  
+  // Otherwise, show the main app
   return (
     <FocusBoxProvider>
       <div className="app">

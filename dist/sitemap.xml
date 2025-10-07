@@ -20,6 +20,14 @@
     </image:image>
   </url>
   
+  <!-- Privacy Policy Page -->
+  <url>
+    <loc>https://focusbox.dev/privacy</loc>
+    <lastmod>2024-12-19T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- PWA Manifest -->
   <url>
     <loc>https://focusbox.dev/manifest.webmanifest</loc>

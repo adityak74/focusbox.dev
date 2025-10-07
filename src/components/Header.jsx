@@ -13,7 +13,8 @@ function Header() {
       <div className="header-content">
         <h1 className="logo">
           <a href="/" aria-label="FocusBox.dev - Home">
-            FocusBox.dev
+            <img src="/logo.png" alt="FocusBox" className="logo-image" />
+            <span className="logo-text">FocusBox.dev</span>
           </a>
         </h1>
         <p className="tagline">Timebox your focus. Locally. Effortlessly.</p>

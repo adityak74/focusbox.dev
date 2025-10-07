@@ -102,7 +102,7 @@ export default defineConfig({
     seoPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'sitemap.xml'],
+      includeAssets: ['favicon.svg', 'logo.png', 'robots.txt', 'sitemap.xml'],
       manifest: {
         name: 'FocusBox.dev',
         short_name: 'FocusBox',
@@ -116,6 +116,16 @@ export default defineConfig({
         lang: 'en',
         categories: ['productivity', 'utilities'],
         icons: [
+          {
+            src: 'logo.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'logo.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
           {
             src: 'favicon.svg',
             sizes: '192x192',

@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useFocusBox } from '../context/FocusBoxContext'
 
 function Notification() {
   const { state } = useFocusBox()
   const [notifications, setNotifications] = useState([])
+  const previousDayNotificationShown = useRef(false)
 
   // Check for previous day tasks on mount
   useEffect(() => {
@@ -13,12 +14,25 @@ function Notification() {
       return createdDate !== today && !task.completedAt
     })
 
-    if (hasOldTasks) {
+    // Only show notification once per session
+    if (hasOldTasks && !previousDayNotificationShown.current) {
+      previousDayNotificationShown.current = true
       setTimeout(() => {
         showNotification('You have tasks from previous days 📅')
       }, 1000)
     }
   }, [state.tasks])
+
+  // Reset notification flag when day changes
+  useEffect(() => {
+    const today = new Date().toDateString()
+    const lastNotificationDate = localStorage.getItem('focusbox-last-notification-date')
+    
+    if (lastNotificationDate !== today) {
+      previousDayNotificationShown.current = false
+      localStorage.setItem('focusbox-last-notification-date', today)
+    }
+  }, [])
 
   // Listen for timer completion
   useEffect(() => {
