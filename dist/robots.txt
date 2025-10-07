@@ -1,11 +1,21 @@
+# Robots.txt for FocusBox.dev
+# A productivity app for task management and timeboxing
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location
 Sitemap: https://focusbox.dev/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
+
+# Allow important files for SEO
+Allow: /favicon.svg
+Allow: /manifest.webmanifest
+Allow: /pwa-*.png
+Allow: /sw.js
+Allow: /registerSW.js
 
 # Disallow crawling of build artifacts and development files
 Disallow: /dist/
@@ -17,3 +27,17 @@ Disallow: /wrangler.toml
 Disallow: /vite.config.js
 Disallow: /package*.json
 Disallow: /CLAUDE.md
+Disallow: /SEO-OPTIMIZATION-SUMMARY.md
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
