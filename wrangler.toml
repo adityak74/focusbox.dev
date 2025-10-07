@@ -1,6 +1,9 @@
 name = "focusbox-dev"
 compatibility_date = "2024-10-01"
 
+[assets]
+directory = "./dist"
+
 [env.production]
 route = "focusbox.dev/*"
 
