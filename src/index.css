@@ -131,7 +131,7 @@ body {
 
 .columns-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -157,6 +157,140 @@ body {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.column-title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.column-title-display {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.column-title-edit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.column-title-input {
+    background: var(--background);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    outline: none;
+    flex: 1;
+}
+
+.column-title-input:focus {
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+}
+
+.column-title-actions {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.column-action-btn {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.column-action-btn:hover {
+    background: var(--surface-hover);
+}
+
+.column-action-btn.edit {
+    color: var(--text-secondary);
+}
+
+.column-action-btn.edit:hover {
+    color: var(--primary-color);
+}
+
+.column-action-btn.save {
+    color: var(--success);
+}
+
+.column-action-btn.save:hover {
+    background: rgba(5, 150, 105, 0.1);
+}
+
+.column-action-btn.cancel {
+    color: var(--text-secondary);
+}
+
+.column-action-btn.cancel:hover {
+    color: var(--danger);
+}
+
+.column-action-btn.delete {
+    color: var(--text-secondary);
+}
+
+.column-action-btn.delete:hover {
+    color: var(--danger);
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.add-column {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    border: 2px dashed var(--border);
+    background: transparent;
+}
+
+.add-column:hover {
+    border-color: var(--primary-color);
+    background: rgba(5, 150, 105, 0.02);
+}
+
+.add-column-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+}
+
+.add-column-btn:hover {
+    color: var(--primary-color);
+    background: rgba(5, 150, 105, 0.05);
+}
+
+.add-column-btn span {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.add-column-form {
+    border: 2px solid var(--primary-color);
+    background: rgba(5, 150, 105, 0.02);
 }
 
 .add-task-btn {

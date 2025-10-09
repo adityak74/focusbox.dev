@@ -5,6 +5,11 @@ const FocusBoxContext = createContext()
 // Initial state
 const initialState = {
   tasks: [],
+  columns: [
+    { id: 'code', title: 'Code' },
+    { id: 'review', title: 'Review' },
+    { id: 'comment', title: 'Comment' }
+  ],
   timer: {
     isRunning: false,
     timeLeft: 25 * 60, // 25 minutes in seconds
@@ -34,6 +39,11 @@ const ACTIONS = {
   DELETE_TASK: 'DELETE_TASK',
   MOVE_TASK: 'MOVE_TASK',
   LOAD_TASKS: 'LOAD_TASKS',
+
+  // Columns
+  ADD_COLUMN: 'ADD_COLUMN',
+  UPDATE_COLUMN: 'UPDATE_COLUMN',
+  DELETE_COLUMN: 'DELETE_COLUMN',
 
   // Timer
   START_TIMER: 'START_TIMER',
@@ -112,6 +122,51 @@ function focusBoxReducer(state, action) {
         tasks: state.tasks.map(task =>
           task.id === action.payload.taskId
             ? { ...task, column: action.payload.newColumn }
+            : task
+        )
+      }
+    }
+
+    case ACTIONS.ADD_COLUMN: {
+      const newColumn = {
+        id: action.payload.id || `column-${Date.now()}`,
+        title: action.payload.title || 'New Column'
+      }
+      return {
+        ...state,
+        columns: [...state.columns, newColumn]
+      }
+    }
+
+    case ACTIONS.UPDATE_COLUMN: {
+      return {
+        ...state,
+        columns: state.columns.map(column =>
+          column.id === action.payload.id
+            ? { ...column, title: action.payload.title }
+            : column
+        )
+      }
+    }
+
+    case ACTIONS.DELETE_COLUMN: {
+      // Don't allow deletion if it would result in less than 3 columns
+      if (state.columns.length <= 3) {
+        return state
+      }
+
+      const columnId = action.payload.id
+      
+      // Move all tasks from deleted column to the first remaining column
+      const remainingColumns = state.columns.filter(col => col.id !== columnId)
+      const targetColumn = remainingColumns[0]?.id
+
+      return {
+        ...state,
+        columns: remainingColumns,
+        tasks: state.tasks.map(task =>
+          task.column === columnId
+            ? { ...task, column: targetColumn }
             : task
         )
       }
@@ -318,6 +373,7 @@ function focusBoxReducer(state, action) {
         localStorage.removeItem('focusbox-tasks')
         localStorage.removeItem('focusbox-settings')
         localStorage.removeItem('focusbox-timer')
+        localStorage.removeItem('focusbox-columns')
       } catch (error) {
         console.error('Error clearing localStorage:', error)
       }
@@ -351,11 +407,20 @@ function initializeState() {
     const savedTasks = localStorage.getItem('focusbox-tasks')
     const savedSettings = localStorage.getItem('focusbox-settings')
     const savedTimer = localStorage.getItem('focusbox-timer')
+    const savedColumns = localStorage.getItem('focusbox-columns')
 
     let loadedState = { ...initialState }
 
     if (savedTasks) {
       loadedState.tasks = JSON.parse(savedTasks)
+    }
+
+    if (savedColumns) {
+      const parsedColumns = JSON.parse(savedColumns)
+      // Ensure we have at least 3 columns
+      if (parsedColumns.length >= 3) {
+        loadedState.columns = parsedColumns
+      }
     }
 
     if (savedSettings) {
@@ -405,6 +470,14 @@ export function FocusBoxProvider({ children }) {
       console.error('Error saving tasks to localStorage:', error)
     }
   }, [state.tasks])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('focusbox-columns', JSON.stringify(state.columns))
+    } catch (error) {
+      console.error('Error saving columns to localStorage:', error)
+    }
+  }, [state.columns])
 
   useEffect(() => {
     try {
