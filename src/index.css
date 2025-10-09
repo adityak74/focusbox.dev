@@ -105,6 +105,13 @@ body {
     font-weight: 400;
 }
 
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-toggle-btn,
 .settings-btn {
     background: none;
     border: none;
@@ -113,11 +120,23 @@ body {
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.theme-toggle-btn:hover,
 .settings-btn:hover {
     background: var(--surface-hover);
     color: var(--text-primary);
+}
+
+.theme-toggle-btn {
+    position: relative;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.05);
 }
 
 /* Main Workspace */
@@ -1053,6 +1072,7 @@ select:focus {
 @media print {
     .timer-widget,
     .footer,
+    .theme-toggle-btn,
     .settings-btn,
     .add-task-btn,
     .task-actions {

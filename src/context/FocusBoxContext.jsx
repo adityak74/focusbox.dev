@@ -18,7 +18,7 @@ const initialState = {
     interval: null
   },
   settings: {
-    darkMode: false,
+    darkMode: true,
     autoAdvance: true,
     soundNotifications: true,
     pomodoroMinutes: 25
@@ -382,7 +382,7 @@ function focusBoxReducer(state, action) {
         ...initialState,
         settings: {
           ...initialState.settings,
-          darkMode: false
+          darkMode: true
         }
       }
     }

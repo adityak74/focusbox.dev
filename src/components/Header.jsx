@@ -1,11 +1,15 @@
-import { Settings } from 'lucide-react'
+import { Settings, Moon, Sun } from 'lucide-react'
 import { useFocusBox } from '../context/FocusBoxContext'
 
 function Header() {
-  const { dispatch, actions } = useFocusBox()
+  const { state, dispatch, actions } = useFocusBox()
 
   const handleSettingsClick = () => {
     dispatch({ type: actions.SHOW_SETTINGS_MODAL })
+  }
+
+  const handleThemeToggle = () => {
+    dispatch({ type: actions.TOGGLE_DARK_MODE })
   }
 
   return (
@@ -18,14 +22,28 @@ function Header() {
           </a>
         </h1>
         <p className="tagline">Timebox your focus. Locally. Effortlessly.</p>
-        <button
-          className="settings-btn"
-          onClick={handleSettingsClick}
-          aria-label="Open settings"
-          type="button"
-        >
-          <Settings size={20} aria-hidden="true" />
-        </button>
+        <div className="header-actions">
+          <button
+            className="theme-toggle-btn"
+            onClick={handleThemeToggle}
+            aria-label={state.settings.darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            type="button"
+          >
+            {state.settings.darkMode ? (
+              <Sun size={20} aria-hidden="true" />
+            ) : (
+              <Moon size={20} aria-hidden="true" />
+            )}
+          </button>
+          <button
+            className="settings-btn"
+            onClick={handleSettingsClick}
+            aria-label="Open settings"
+            type="button"
+          >
+            <Settings size={20} aria-hidden="true" />
+          </button>
+        </div>
       </div>
     </header>
   )
